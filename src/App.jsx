@@ -2,7 +2,13 @@ import { useState } from 'react'
 
 function App() {
     return (
-        <h1 className='text-amber-300 text-2xl'>Hello World</h1>
+        <>
+            <header className="text-center">
+                img
+            </header>
+            <h1 className='text-amber-300 text-2xl font-cursive text-peachOrange'>Hello World</h1>
+        </>
+
     )
 }
 
