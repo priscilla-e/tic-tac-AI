@@ -11,6 +11,7 @@ export default {
         earth: '#383624',
         darkEarth: '#282617',
         peachOrange: 'rgba(250, 176, 103, 0.87)',
+        smoke: '#e1dec7',
       },
       fontFamily: {
         sans: ["Roboto Slab", "sans-serif"],
@@ -22,6 +23,9 @@ export default {
       },
       backgroundSize: {
         'full': '100% 100%, 30% 30%',
+      },
+      boxShadow: {
+        'custom': '0 0 15px rgba(0, 0, 0, 0.5)'
       }
     },
   },
