@@ -1,18 +1,17 @@
 import {useState} from 'react';
 
 
-export default function Player({defaultName, symbol}) {
+
+export default function Player({ defaultName, symbol, isActive, onSave }) {
     const [playerName, setPlayerName] = useState(defaultName);
     const [isEditing, setIsEditing] = useState(false);
-
-    const isActive = true;
 
     const handleEdit = () => {
         setIsEditing((isEditing) => !isEditing);
 
         if (isEditing) {
-            console.log(playerName);
-            setPlayerName(playerName);
+            // handle save instead
+            onSave(symbol, playerName.toUpperCase());
         }
     };
 
@@ -20,7 +19,7 @@ export default function Player({defaultName, symbol}) {
         <>
             <div
                 className={`flex items-center w-1/2 space-x-4 ${
-                    isActive ? 'highlight-player' : ''
+                    isActive ? 'border-2 border-lightYellow animate-pulse' : ''
                 }`}
             >
                 {isEditing ? (
@@ -31,8 +30,7 @@ export default function Player({defaultName, symbol}) {
                         onChange={(e) => setPlayerName(e.target.value)}
                     />
                 ) : (
-                    <span
-                        className="inline-block flex-1 w-10 whitespace-nowrap truncate px-2 py-2 text-sm text-smoke uppercase md:py-4 md:px-4">
+                    <span className="inline-block flex-1 w-10 whitespace-nowrap truncate px-2 py-2 text-sm text-smoke uppercase md:py-4 md:px-4">
                         {playerName}
                     </span>
                 )}
