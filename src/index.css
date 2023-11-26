@@ -4,11 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
-.highlight-player {
-    @apply border-2 border-lightYellow;
-    /* border: 2px solid #f6e35a; */
-    animation: pulse 2s infinite ease-in-out;
+@layer utilities {
+    .animate-pop-in {
+        animation: pop-in 0.5s cubic-bezier(0.68, -0.55, 0.65, 0.52) forwards;
+    }
 }
+
 
 @keyframes pulse {
     0% {
@@ -22,6 +23,23 @@
     100% {
         border-color: #f6e35a;
         box-shadow: 0 0 0 0 rgba(246, 227, 90, 0);
+    }
+}
+
+/* Fancy animation for showing the "Game Over" element */
+@keyframes pop-in {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    80% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
     }
 }
 
