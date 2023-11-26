@@ -2,6 +2,8 @@ import {useState} from 'react'
 
 import Header from './components/Header.jsx'
 import Player from './components/Player.jsx'
+import GameBoard from './components/GameBoard.jsx'
+
 
 function App() {
     return (
@@ -15,11 +17,11 @@ function App() {
                 >
                     {/*Player Names Container*/}
                     <div className="flex space-x-2 md:space-x-10">
-                        {/*Player Name 1*/}
                         <Player defaultName='Player 1' symbol='X'/>
                         <Player defaultName='Player 2' symbol='O'/>
                     </div>
-                    Hello world
+
+                    <GameBoard/>
                 </div>
             </main>
         </>
