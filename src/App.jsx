@@ -106,8 +106,11 @@ function App() {
         })
     }
 
-    // console.log(players)
-    // console.log(players.winner)
+    const handleRematch = () => {
+        setGameBoard(INITIAL_GAMEBOARD);
+        setCurrentPlayer('X');
+    };
+
 
     return (
         <>
@@ -118,9 +121,7 @@ function App() {
                     {(winner || isDraw) && (
                         <GameOver
                             winner={winner ? players[winner] : winner}
-                            onRematch={() => {
-                                console.log('rematch!');
-                            }}
+                            onRematch={handleRematch}
                         />
                     )}
                     {/*Player Names Container*/}
