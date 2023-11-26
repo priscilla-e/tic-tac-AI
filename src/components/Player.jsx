@@ -1,6 +1,4 @@
-import {useState} from 'react';
-
-
+import { useState } from 'react';
 
 export default function Player({ defaultName, symbol, isActive, onSave }) {
     const [playerName, setPlayerName] = useState(defaultName);
@@ -19,7 +17,7 @@ export default function Player({ defaultName, symbol, isActive, onSave }) {
         <>
             <div
                 className={`flex items-center w-1/2 space-x-4 ${
-                    isActive ? 'border-2 border-lightYellow animate-pulse' : ''
+                    isActive ? 'border-2 border-lightYellow animate-ping' : ''
                 }`}
             >
                 {isEditing ? (
@@ -30,7 +28,11 @@ export default function Player({ defaultName, symbol, isActive, onSave }) {
                         onChange={(e) => setPlayerName(e.target.value)}
                     />
                 ) : (
-                    <span className="inline-block flex-1 w-10 whitespace-nowrap truncate px-2 py-2 text-sm text-smoke uppercase md:py-4 md:px-4">
+                    <span
+                        className={`inline-block flex-1 w-10 whitespace-nowrap truncate px-2 py-2 text-sm text-smoke uppercase md:py-4 md:px-4 ${
+                            isActive ? 'animate-pulse' : ''
+                        }`}
+                    >
                         {playerName}
                     </span>
                 )}

@@ -6,7 +6,6 @@ export default function GameBoard({board, onSelect}) {
     const clickAudioRef = useRef(new Audio(clickSound));
 
     const handleClick = (row, col) => {
-        console.log(clickAudioRef);
         clickAudioRef.current.play().catch(error => console.error('Error playing sound:', error));
         onSelect(row, col);
     };
