@@ -119,7 +119,7 @@ function App() {
                         />
                     </div>
 
-                    <GameBoard board={gameBoard} onSelect={handleSelect} />
+                    <GameBoard board={gameBoard} onSelect={handleSelect} isComTurn={isComTurn} />
                 </div>
 
                 <GameSettings
