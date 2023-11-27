@@ -3,6 +3,7 @@ import clickSound from "../assets/click-sound.wav"
 
 
 export default function GameBoard({board, onSelect}) {
+    const boardSize = board.length;
     const clickAudioRef = useRef(new Audio(clickSound));
 
     const handleClick = (row, col) => {
@@ -13,7 +14,7 @@ export default function GameBoard({board, onSelect}) {
 
     return (
         <div
-            className={`grid grid-cols-3 gap-3 max-w-lg mx-auto mt-8 md:gap-6`}
+            className={`grid grid-cols-${boardSize} gap-3 max-w-lg mx-auto mt-8 md:gap-6`}
         >
             {board.map((row, rowIndex) =>
                 row.map((col, colIndex) => (
