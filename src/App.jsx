@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+
+import clickSound from "./assets/click-sound.wav"
 
 import Header from './components/Header.jsx';
 import Player from './components/Player.jsx';
@@ -26,6 +28,7 @@ const DEFAULT_SETTINGS = {
 }
 
 function App() {
+    const clickAudioRef = useRef(new Audio(clickSound));
     const [gameSettings, setGameSettings] = useState(DEFAULT_SETTINGS);
     const [players, setPlayers] = useState(PLAYERS);
     const [gameBoard, setGameBoard] = useState(
@@ -38,8 +41,9 @@ function App() {
     const isComTurn =
         gameSettings.mode === 'COM' && players[currentPlayer] === 'COM';
 
+
     useEffect(() => {
-        if (isComTurn) {
+        if (isComTurn && !(winner || isDraw)) {
             // Introduce a delay for the computer's turn
             const comMoveTimeout = setTimeout(() => {
                 const emptyCell = getRandomEmptyCell(gameBoard);
@@ -48,12 +52,15 @@ function App() {
                 }
             }, 1000); 
 
-
             return () => clearTimeout(comMoveTimeout);
         }
     }, [isComTurn, gameBoard]);
 
     const handleSelect = (row, col) => {
+        // Play click sound
+        clickAudioRef.current.play().catch(error => console.error('Error playing sound:', error));
+
+        // Set the cell to the current player
         setGameBoard((prevBoard) => {
             const newBoard = prevBoard.map((row) => [...row]);
             newBoard[row][col] = currentPlayer;
@@ -61,6 +68,7 @@ function App() {
             return newBoard;
         });
 
+        // Change the current player
         if (currentPlayer === 'X') {
             setCurrentPlayer('O');
         } else {

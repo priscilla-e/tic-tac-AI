@@ -1,13 +1,8 @@
-import {useRef} from 'react'
-import clickSound from "../assets/click-sound.wav"
-
-
 export default function GameBoard({board, onSelect}) {
     const boardSize = board.length;
-    const clickAudioRef = useRef(new Audio(clickSound));
+
 
     const handleClick = (row, col) => {
-        clickAudioRef.current.play().catch(error => console.error('Error playing sound:', error));
         onSelect(row, col);
     };
        
