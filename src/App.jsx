@@ -76,10 +76,22 @@ const createEmptyGameBoard = (size = 3) =>  {
     return gameBoard
 }
 
+function getRandomEmptyCell(board) {
+    const emptyCells = [];
+    for (let i = 0; i < board.length; i++) {
+        for (let j = 0; j < board[i].length; j++) {
+            if (board[i][j] === null) {
+                emptyCells.push({ row: i, col: j });
+            }
+        }
+    }
+    const randomIndex = Math.floor(Math.random() * emptyCells.length);
+    return emptyCells[randomIndex];
+}
+
 const PLAYERS = {
-    // symbol: name
     X: 'Player 1',
-    O: 'Player 2',
+    O: 'COM',
 };
 
 const DEFAULT_SETTINGS = {
@@ -98,6 +110,23 @@ function App() {
 
     let winner = checkWinner(gameBoard);
     let isDraw = !winner && checkDraw(gameBoard);
+    const isComTurn =
+        gameSettings.mode === 'COM' && players[currentPlayer] === 'COM';
+
+    useEffect(() => {
+        if (isComTurn) {
+            // Introduce a delay for the computer's turn
+            const comMoveTimeout = setTimeout(() => {
+                const emptyCell = getRandomEmptyCell(gameBoard);
+                if (emptyCell) {
+                    handleSelect(emptyCell.row, emptyCell.col);
+                }
+            }, 1000); 
+
+
+            return () => clearTimeout(comMoveTimeout);
+        }
+    }, [isComTurn, gameBoard]);
 
     const handleSelect = (row, col) => {
         setGameBoard((prevBoard) => {
@@ -124,7 +153,6 @@ function App() {
         setGameBoard(createEmptyGameBoard(gameSettings.boardSize));
         setCurrentPlayer('X');
     };
-
 
     useEffect(() => {
         handleRematch();
