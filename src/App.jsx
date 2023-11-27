@@ -1,16 +1,17 @@
-import {useState} from 'react'
+import { useEffect, useState } from 'react';
 
-import Header from './components/Header.jsx'
-import Player from './components/Player.jsx'
-import GameBoard from './components/GameBoard.jsx'
+import Header from './components/Header.jsx';
+import Player from './components/Player.jsx';
+import GameBoard from './components/GameBoard.jsx';
 import GameOver from './components/GameOver.jsx';
+import GameSettings from './components/GameSettings.jsx';
 
 function checkWinner(board) {
     const size = board.length;
 
     // Check rows and columns
     for (let i = 0; i < size; i++) {
-        if (board[i][0] && board[i].every(val => val === board[i][0])) {
+        if (board[i][0] && board[i].every((val) => val === board[i][0])) {
             return board[i][0]; // Winner in a row
         }
 
@@ -55,35 +56,48 @@ function checkWinner(board) {
 
 const checkDraw = (gameBoard) => {
     for (let row of gameBoard) {
-        let rowFilled = row.every((cell) => cell !== null)
+        let rowFilled = row.every((cell) => cell !== null);
         if (!rowFilled) {
             return false;
         }
     }
     return true;
+};
+
+const createEmptyGameBoard = (size = 3) =>  {
+    const gameBoard = []
+    for (let i = 0; i < size; i++) {
+        const row = []
+        for (let j = 0; j < size; j++) {
+            row.push(null)
+        } 
+        gameBoard.push(row)
+    }
+    return gameBoard
 }
-
-
-const INITIAL_GAMEBOARD = [
-    [null, null, null],
-    [null, null, null],
-    [null, null, null],
-]
 
 const PLAYERS = {
     // symbol: name
     X: 'Player 1',
-    O: 'Player 2'
+    O: 'Player 2',
+};
+
+const DEFAULT_SETTINGS = {
+    mode: 'COM', //COM or MULTI_PLAYER
+    boardSize: 3,
+    playAudio: true
 }
 
 function App() {
+    const [gameSettings, setGameSettings] = useState(DEFAULT_SETTINGS);
     const [players, setPlayers] = useState(PLAYERS);
-    const [gameBoard, setGameBoard] = useState(INITIAL_GAMEBOARD);
+    const [gameBoard, setGameBoard] = useState(
+        createEmptyGameBoard(DEFAULT_SETTINGS.boardSize)
+    );
     const [currentPlayer, setCurrentPlayer] = useState('X');
 
     let winner = checkWinner(gameBoard);
     let isDraw = !winner && checkDraw(gameBoard);
-
 
     const handleSelect = (row, col) => {
         setGameBoard((prevBoard) => {
@@ -98,19 +112,23 @@ function App() {
         } else {
             setCurrentPlayer('X');
         }
-    }
+    };
 
     const handleNameChange = (symbol, newName) => {
         setPlayers((prevPlayers) => {
-            return {...prevPlayers, [symbol]: newName}
-        })
-    }
+            return { ...prevPlayers, [symbol]: newName };
+        });
+    };
 
     const handleRematch = () => {
-        setGameBoard(INITIAL_GAMEBOARD);
+        setGameBoard(createEmptyGameBoard(gameSettings.boardSize));
         setCurrentPlayer('X');
     };
 
+
+    useEffect(() => {
+        handleRematch();
+    }, [gameSettings]);
 
     return (
         <>
@@ -142,10 +160,16 @@ function App() {
 
                     <GameBoard board={gameBoard} onSelect={handleSelect} />
                 </div>
+
+                <GameSettings
+                    settings={gameSettings}
+                    onSettingsChange={(newSettings) =>
+                        setGameSettings(newSettings)
+                    }
+                />
             </main>
         </>
     );
 }
 
-
-export default App
+export default App;
