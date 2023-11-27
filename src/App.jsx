@@ -29,6 +29,7 @@ const DEFAULT_SETTINGS = {
 
 function App() {
     const clickAudioRef = useRef(new Audio(clickSound));
+
     const [gameSettings, setGameSettings] = useState(DEFAULT_SETTINGS);
     const [players, setPlayers] = useState(PLAYERS);
     const [gameBoard, setGameBoard] = useState(
@@ -41,7 +42,6 @@ function App() {
     const isComTurn =
         gameSettings.mode === 'COM' && players[currentPlayer] === 'COM';
 
-
     useEffect(() => {
         if (isComTurn && !(winner || isDraw)) {
             // Introduce a delay for the computer's turn
@@ -50,11 +50,15 @@ function App() {
                 if (emptyCell) {
                     handleSelect(emptyCell.row, emptyCell.col);
                 }
-            }, 1000); 
+            }, 1000);
 
             return () => clearTimeout(comMoveTimeout);
         }
     }, [isComTurn, gameBoard]);
+
+    useEffect(() => {
+        handleRematch();
+    }, [gameSettings]);
 
     const handleSelect = (row, col) => {
         // Play click sound
@@ -86,10 +90,6 @@ function App() {
         setGameBoard(createEmptyGameBoard(gameSettings.boardSize));
         setCurrentPlayer('X');
     };
-
-    useEffect(() => {
-        handleRematch();
-    }, [gameSettings]);
 
     return (
         <>
