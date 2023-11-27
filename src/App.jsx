@@ -109,12 +109,14 @@ function App() {
                             defaultName={players.X}
                             symbol="X"
                             isActive={currentPlayer == 'X'}
+                            gameMode={gameSettings.mode}
                             onSave={handleNameChange}
                         />
                         <Player
                             defaultName={players.O}
                             symbol="O"
                             isActive={currentPlayer == 'O'}
+                            gameMode={gameSettings.mode}
                             onSave={handleNameChange}
                         />
                     </div>
