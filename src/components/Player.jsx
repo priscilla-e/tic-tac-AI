@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function Player({ defaultName, symbol, isActive, gameMode, onSave }) {
+export default function Player({ defaultName, symbol, isActive, onSave }) {
     const [playerName, setPlayerName] = useState(defaultName);
     const [isEditing, setIsEditing] = useState(false);
 
@@ -40,7 +40,6 @@ export default function Player({ defaultName, symbol, isActive, gameMode, onSave
                     {symbol}
                 </span>
                 <button
-                    disabled={gameMode === 'COM' && symbol === 'O'}
                     className="w-10 text-sm text-darkYellow focus:outline-none md:pr-14"
                     onClick={handleEdit}
                 >

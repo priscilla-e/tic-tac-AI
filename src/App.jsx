@@ -1,6 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
-
-import clickSound from "./assets/click-sound.wav"
+import { useEffect, useState } from 'react';
 
 import Header from './components/Header.jsx';
 import Player from './components/Player.jsx';
@@ -24,16 +22,14 @@ const PLAYERS = {
 const DEFAULT_SETTINGS = {
     mode: 'COM', //COM or MULTI_PLAYER
     boardSize: 3,
-    playAudio: true
+    allowAudio: true
 }
 
 function App() {
-    const clickAudioRef = useRef(new Audio(clickSound));
-
     const [gameSettings, setGameSettings] = useState(DEFAULT_SETTINGS);
     const [players, setPlayers] = useState(PLAYERS);
     const [gameBoard, setGameBoard] = useState(
-        createEmptyGameBoard(DEFAULT_SETTINGS.boardSize)
+        createEmptyGameBoard(gameSettings.boardSize)
     );
     const [currentPlayer, setCurrentPlayer] = useState('X');
 
@@ -43,28 +39,21 @@ function App() {
         gameSettings.mode === 'COM' && players[currentPlayer] === 'COM';
 
     useEffect(() => {
-        if (isComTurn && !(winner || isDraw)) {
+        if (isComTurn) {
             // Introduce a delay for the computer's turn
             const comMoveTimeout = setTimeout(() => {
                 const emptyCell = getRandomEmptyCell(gameBoard);
                 if (emptyCell) {
                     handleSelect(emptyCell.row, emptyCell.col);
                 }
-            }, 1000);
+            }, 1000); 
+
 
             return () => clearTimeout(comMoveTimeout);
         }
     }, [isComTurn, gameBoard]);
 
-    useEffect(() => {
-        handleRematch();
-    }, [gameSettings]);
-
     const handleSelect = (row, col) => {
-        // Play click sound
-        clickAudioRef.current.play().catch(error => console.error('Error playing sound:', error));
-
-        // Set the cell to the current player
         setGameBoard((prevBoard) => {
             const newBoard = prevBoard.map((row) => [...row]);
             newBoard[row][col] = currentPlayer;
@@ -72,7 +61,6 @@ function App() {
             return newBoard;
         });
 
-        // Change the current player
         if (currentPlayer === 'X') {
             setCurrentPlayer('O');
         } else {
@@ -91,6 +79,14 @@ function App() {
         setCurrentPlayer('X');
     };
 
+    useEffect(() => {
+        handleRematch();
+    }, [gameSettings]);
+
+
+    const handleSettingsChange = (newSettings) => {
+        console.log(newSettings);
+    }
     return (
         <>
             <Header />
@@ -109,26 +105,22 @@ function App() {
                             defaultName={players.X}
                             symbol="X"
                             isActive={currentPlayer == 'X'}
-                            gameMode={gameSettings.mode}
                             onSave={handleNameChange}
                         />
                         <Player
                             defaultName={players.O}
                             symbol="O"
                             isActive={currentPlayer == 'O'}
-                            gameMode={gameSettings.mode}
                             onSave={handleNameChange}
                         />
                     </div>
 
-                    <GameBoard board={gameBoard} onSelect={handleSelect} isComTurn={isComTurn} />
+                    <GameBoard board={gameBoard} onSelect={handleSelect} />
                 </div>
 
                 <GameSettings
-                    settings={gameSettings}
-                    onSettingsChange={(newSettings) =>
-                        setGameSettings(newSettings)
-                    }
+                    initialSettings={gameSettings}
+                    onSettingsChange={handleSettingsChange}
                 />
             </main>
         </>
