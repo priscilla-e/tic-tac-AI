@@ -1,14 +1,17 @@
 export default function GameBoard({board, onSelect, isComTurn}) {
-    const boardSize = board.length || 3;
-
     const handleClick = (row, col) => {
         onSelect(row, col);
     };
+
+    let classes = "grid grid-cols-3 gap-3 max-w-lg mx-auto mt-8 md:gap-6"
+    if (board.length === 4) {
+        classes = "grid grid-cols-4 gap-3 max-w-lg mx-auto mt-8 md:gap-6"
+    }
        
 
     return (
         <div
-            className={`grid grid-cols-3 gap-3 max-w-lg mx-auto mt-8 md:gap-6`}
+            className={classes}
         >
             {board.map((row, rowIndex) =>
                 row.map((col, colIndex) => (
