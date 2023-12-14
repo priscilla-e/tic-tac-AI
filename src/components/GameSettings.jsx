@@ -6,7 +6,6 @@ export default function GameSettings({ initialSettings, onSettingsChange }) {
     const [allowAudio, setAllowAudio] = useState(initialSettings.allowAudio);
 
 
-
     const handleSave = (e) => {
         e.preventDefault();
 

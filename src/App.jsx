@@ -14,27 +14,29 @@ import {
 } from './utils.js';
 
 
+
+const DEFAULT_SETTINGS = {
+    mode: 'COM', //COM, MULTI_PLAYER
+    boardSize: 3,
+    allowAudio: true
+}
+
 const PLAYERS = {
     X: 'Player 1',
     O: 'COM',
 };
 
-const DEFAULT_SETTINGS = {
-    mode: 'COM', //COM or MULTI_PLAYER
-    boardSize: 3,
-    allowAudio: true
-}
-
 function App() {
     const [gameSettings, setGameSettings] = useState(DEFAULT_SETTINGS);
-    const [players, setPlayers] = useState(PLAYERS);
     const [gameBoard, setGameBoard] = useState(
         createEmptyGameBoard(gameSettings.boardSize)
     );
+    const [players, setPlayers] = useState(PLAYERS);
     const [currentPlayer, setCurrentPlayer] = useState('X');
 
     let winner = checkWinner(gameBoard);
     let isDraw = !winner && checkDraw(gameBoard);
+
     const isComTurn =
         gameSettings.mode === 'COM' && players[currentPlayer] === 'COM';
 
@@ -77,16 +79,24 @@ function App() {
     const handleRematch = () => {
         setGameBoard(createEmptyGameBoard(gameSettings.boardSize));
         setCurrentPlayer('X');
+        
+        // Set player 2 to COM or Player 2 depending on the game mode
+        if (gameSettings.mode === 'COM') {
+            setPlayers((prevPlayers) => {
+                return { ...prevPlayers, O: 'COM' };
+            });
+        }
+        else if (gameSettings.mode === 'MULTI') {
+            setPlayers((prevPlayers) => {
+                return { ...prevPlayers, O: 'Player 2' };
+            });
+        }
     };
 
     useEffect(() => {
         handleRematch();
     }, [gameSettings]);
 
-
-    const handleSettingsChange = (newSettings) => {
-        console.log(newSettings);
-    }
     return (
         <>
             <Header />
@@ -120,7 +130,7 @@ function App() {
 
                 <GameSettings
                     initialSettings={gameSettings}
-                    onSettingsChange={handleSettingsChange}
+                    onSettingsChange={(newSettings) => setGameSettings(newSettings)}
                 />
             </main>
         </>
