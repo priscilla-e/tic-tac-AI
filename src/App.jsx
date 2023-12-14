@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-
 import Header from './components/Header.jsx';
 import Player from './components/Player.jsx';
 import GameBoard from './components/GameBoard.jsx';
@@ -11,19 +10,15 @@ import {
     checkDraw,
     createEmptyGameBoard,
     getRandomEmptyCell,
+    playAudio,
 } from './utils.js';
 
-
+import clickSound from './assets/click-sound.wav';
 
 const DEFAULT_SETTINGS = {
     mode: 'COM', //COM, MULTI_PLAYER
     boardSize: 3,
-    allowAudio: true
-}
-
-const PLAYERS = {
-    X: 'Player 1',
-    O: 'COM',
+    allowAudio: true,
 };
 
 function App() {
@@ -31,14 +26,19 @@ function App() {
     const [gameBoard, setGameBoard] = useState(
         createEmptyGameBoard(gameSettings.boardSize)
     );
-    const [players, setPlayers] = useState(PLAYERS);
+    const [players, setPlayers] = useState({ X: 'Player 1', O: 'COM' });
     const [currentPlayer, setCurrentPlayer] = useState('X');
 
     let winner = checkWinner(gameBoard);
     let isDraw = !winner && checkDraw(gameBoard);
-
     const isComTurn =
-        gameSettings.mode === 'COM' && players[currentPlayer] === 'COM';
+        gameSettings.mode === 'COM' &&
+        players[currentPlayer] === 'COM' &&
+        !winner; // com shouldn't play if there's already a winner
+
+    useEffect(() => {
+        handleRematch();
+    }, [gameSettings]);
 
     useEffect(() => {
         if (isComTurn) {
@@ -48,8 +48,7 @@ function App() {
                 if (emptyCell) {
                     handleSelect(emptyCell.row, emptyCell.col);
                 }
-            }, 1000); 
-
+            }, 1000);
 
             return () => clearTimeout(comMoveTimeout);
         }
@@ -63,6 +62,12 @@ function App() {
             return newBoard;
         });
 
+        // Play click sound
+        if (gameSettings.allowAudio) {
+            playAudio(clickSound);
+        }
+
+        // Switch player
         if (currentPlayer === 'X') {
             setCurrentPlayer('O');
         } else {
@@ -79,23 +84,18 @@ function App() {
     const handleRematch = () => {
         setGameBoard(createEmptyGameBoard(gameSettings.boardSize));
         setCurrentPlayer('X');
-        
+
         // Set player 2 to COM or Player 2 depending on the game mode
         if (gameSettings.mode === 'COM') {
             setPlayers((prevPlayers) => {
                 return { ...prevPlayers, O: 'COM' };
             });
-        }
-        else if (gameSettings.mode === 'MULTI') {
+        } else if (gameSettings.mode === 'MULTI') {
             setPlayers((prevPlayers) => {
                 return { ...prevPlayers, O: 'Player 2' };
             });
         }
     };
-
-    useEffect(() => {
-        handleRematch();
-    }, [gameSettings]);
 
     return (
         <>
@@ -105,7 +105,8 @@ function App() {
                 <div className="relative mx-auto px-2 py-8 w-full bg-white shadow-custom rounded-md bg-gradient-to-b from-earth to-darkEarth md:max-w-2xl md:px-8 md:py-12">
                     {(winner || isDraw) && (
                         <GameOver
-                            winner={winner ? players[winner] : winner}
+                            winner={winner ? players[winner] : null}
+                            gameSettings={gameSettings}
                             onRematch={handleRematch}
                         />
                     )}
@@ -125,12 +126,18 @@ function App() {
                         />
                     </div>
 
-                    <GameBoard board={gameBoard} onSelect={handleSelect} />
+                    <GameBoard
+                        board={gameBoard}
+                        isComTurn={isComTurn}
+                        onSelect={handleSelect}
+                    />
                 </div>
 
                 <GameSettings
                     initialSettings={gameSettings}
-                    onSettingsChange={(newSettings) => setGameSettings(newSettings)}
+                    onSettingsChange={(newSettings) =>
+                        setGameSettings(newSettings)
+                    }
                 />
             </main>
         </>
