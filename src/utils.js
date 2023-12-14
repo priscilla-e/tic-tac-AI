@@ -108,3 +108,13 @@ export function getRandomEmptyCell(board) {
     const randomIndex = Math.floor(Math.random() * emptyCells.length);
     return emptyCells[randomIndex];
 }
+
+/**
+ * Plays the provided audio.
+ *
+ * @param {string} audio - The audio file path to play.
+ */
+export const playAudio = (audio) => {
+    const audioElement = new Audio(audio);
+    audioElement.play();
+}
