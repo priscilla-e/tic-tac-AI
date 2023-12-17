@@ -11,44 +11,57 @@ import {
     createEmptyGameBoard,
     getRandomEmptyCell,
     playAudio,
+    getMoveFromGPT
 } from './utils.js';
 
 import clickSound from './assets/click-sound.wav';
 
+
 const DEFAULT_SETTINGS = {
-    mode: 'COM', //COM, MULTI_PLAYER
+    mode: 'GPT', //GPT, MINIMAX, MULTI_PLAYER
     boardSize: 3,
     allowAudio: true,
 };
+
+const COM_NAMES = ['GPT', 'MINIMAX'];
+
+let comMoveTimeout;
 
 function App() {
     const [gameSettings, setGameSettings] = useState(DEFAULT_SETTINGS);
     const [gameBoard, setGameBoard] = useState(
         createEmptyGameBoard(gameSettings.boardSize)
     );
-    const [players, setPlayers] = useState({ X: 'Player 1', O: 'COM' });
+    const [players, setPlayers] = useState({ X: 'Player 1', O: gameSettings.mode });
     const [currentPlayer, setCurrentPlayer] = useState('X');
 
     let winner = checkWinner(gameBoard);
     let isDraw = !winner && checkDraw(gameBoard);
-    const isComTurn =
-        gameSettings.mode === 'COM' &&
-        players[currentPlayer] === 'COM' &&
-        !winner; // com shouldn't play if there's already a winner
+    let isComTurn =
+        !winner &&
+        COM_NAMES.includes(players[currentPlayer])
+    
 
+    // reset the game if the game settings change
     useEffect(() => {
         handleRematch();
     }, [gameSettings]);
 
     useEffect(() => {
         if (isComTurn) {
-            // Introduce a delay for the computer's turn
-            const comMoveTimeout = setTimeout(() => {
-                const emptyCell = getRandomEmptyCell(gameBoard);
-                if (emptyCell) {
-                    handleSelect(emptyCell.row, emptyCell.col);
-                }
-            }, 1000);
+            if (gameSettings.mode === 'GPT') {
+                const move = getMoveFromGPT("gpt-4-1106-preview", gameBoard);
+                move.then((move) => {
+                    handleSelect(move.row, move.col);
+                });
+            }
+            else if (gameSettings.mode === 'MINIMAX') {
+                comMoveTimeout = setTimeout(() => {
+                    const move = getRandomEmptyCell(gameBoard);
+                    handleSelect(move.row, move.col);
+                }, 1000)
+            }
+
 
             return () => clearTimeout(comMoveTimeout);
         }
@@ -85,14 +98,14 @@ function App() {
         setGameBoard(createEmptyGameBoard(gameSettings.boardSize));
         setCurrentPlayer('X');
 
-        // Set player 2 to COM or Player 2 depending on the game mode
-        if (gameSettings.mode === 'COM') {
+        //  Player 2 depending on the game mode
+        if (gameSettings.mode === 'MULTI') {
             setPlayers((prevPlayers) => {
-                return { ...prevPlayers, O: 'COM' };
+                return { ...prevPlayers, O: 'Player 2'};
             });
-        } else if (gameSettings.mode === 'MULTI') {
+        } else {
             setPlayers((prevPlayers) => {
-                return { ...prevPlayers, O: 'Player 2' };
+                return { ...prevPlayers, O: gameSettings.mode};
             });
         }
     };

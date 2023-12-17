@@ -46,7 +46,7 @@ export default function Player({ defaultName, symbol, isActive, onSave }) {
                 <button
                     className="w-10 text-sm text-darkYellow focus:outline-none md:pr-14"
                     onClick={handleEdit}
-                    disabled={defaultName === 'COM'}
+                    disabled={defaultName === 'GPT' || defaultName === 'MINIMAX'}
                 >
                     {isEditing ? 'Save' : 'Edit'}
                 </button>

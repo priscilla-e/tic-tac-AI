@@ -30,7 +30,8 @@ export default function GameSettings({ initialSettings, onSettingsChange }) {
                         onChange={(e) => setMode(e.target.value)}
                         className='bg-darkEarth text-smoke rounded-sm'
                     >
-                        <option value="COM">COM</option>
+                        <option value="GPT">GPT</option>
+                        <option value="MINIMAX">Minimax</option>
                         <option value="MULTI">Multiplayer</option>
                     </select>
                 </div>
