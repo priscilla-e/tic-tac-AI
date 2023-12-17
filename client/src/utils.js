@@ -1,4 +1,4 @@
-import { SERVER } from "../axios";
+import { SERVER } from "./axios";
 
 /**
  * Creates an empty game board of the specified size.
