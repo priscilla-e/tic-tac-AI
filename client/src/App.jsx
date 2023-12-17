@@ -11,11 +11,10 @@ import {
     createEmptyGameBoard,
     getRandomEmptyCell,
     playAudio,
-    getMoveFromGPT
+    getMoveFromGPT,
 } from './utils.js';
 
 import clickSound from './assets/click-sound.wav';
-
 
 const DEFAULT_SETTINGS = {
     mode: 'GPT', //GPT, MINIMAX, MULTI_PLAYER
@@ -32,15 +31,15 @@ function App() {
     const [gameBoard, setGameBoard] = useState(
         createEmptyGameBoard(gameSettings.boardSize)
     );
-    const [players, setPlayers] = useState({ X: 'Player 1', O: gameSettings.mode });
+    const [players, setPlayers] = useState({
+        X: 'Player 1',
+        O: gameSettings.mode,
+    });
     const [currentPlayer, setCurrentPlayer] = useState('X');
 
     let winner = checkWinner(gameBoard);
     let isDraw = !winner && checkDraw(gameBoard);
-    let isComTurn =
-        !winner &&
-        COM_NAMES.includes(players[currentPlayer])
-    
+    let isComTurn = !winner && COM_NAMES.includes(players[currentPlayer]);
 
     // reset the game if the game settings change
     useEffect(() => {
@@ -50,18 +49,17 @@ function App() {
     useEffect(() => {
         if (isComTurn) {
             if (gameSettings.mode === 'GPT') {
-                const move = getMoveFromGPT("gpt-4-1106-preview", gameBoard);
+                // model: "gpt-4-1106-preview", 
+                const move = getMoveFromGPT(gameBoard, "gpt-4-1106-preview");
                 move.then((move) => {
                     handleSelect(move.row, move.col);
                 });
-            }
-            else if (gameSettings.mode === 'MINIMAX') {
+            } else if (gameSettings.mode === 'MINIMAX') {
                 comMoveTimeout = setTimeout(() => {
                     const move = getRandomEmptyCell(gameBoard);
                     handleSelect(move.row, move.col);
-                }, 1000)
+                }, 1000);
             }
-
 
             return () => clearTimeout(comMoveTimeout);
         }
@@ -101,11 +99,11 @@ function App() {
         //  Player 2 depending on the game mode
         if (gameSettings.mode === 'MULTI') {
             setPlayers((prevPlayers) => {
-                return { ...prevPlayers, O: 'Player 2'};
+                return { ...prevPlayers, O: 'Player 2' };
             });
         } else {
             setPlayers((prevPlayers) => {
-                return { ...prevPlayers, O: gameSettings.mode};
+                return { ...prevPlayers, O: gameSettings.mode };
             });
         }
     };

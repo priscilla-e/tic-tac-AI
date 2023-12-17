@@ -121,6 +121,12 @@ export const playAudio = (audio) => {
 }
 
 
+/**
+ * Converts a game board to a string.
+ *
+ * @param {Array<Array<null|string>>} board - The game board represented as a 2D array.
+ * @returns {string} - The game board represented as a string.
+ */
 export const stringifyBoard = (board) => {
     let boardStr = "";
     for (let row of board) {
@@ -138,7 +144,12 @@ export const stringifyBoard = (board) => {
 
 
 
-export async function getMoveFromGPT(model="gpt-3.5-turbo-1106", board) {
-    const response = await SERVER.get('/gpt-move', { params: {model, board: stringifyBoard(board)}})
-    return JSON.parse(response.data);
+export async function getMoveFromGPT(board, model="gpt-3.5-turbo-1106") {
+    try {
+        const response = await SERVER.get('/gpt-move', { params: {model, board: stringifyBoard(board)}})
+        return JSON.parse(response.data);
+    }
+    catch (err) {
+        console.log(err);
+    }
 }
