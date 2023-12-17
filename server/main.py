@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173/", "https://localhost:5173/"],
+    allow_origins=["http://localhost:5173", "https://localhost:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -21,10 +21,9 @@ async def root():
     return {"message": "API is running..."}
 
 
-@app.get("/gpt_move")
+@app.get("/gpt-move")
 async def get_gpt_move(board: str, model: str = "gpt-3.5-turbo-1106"):
     response = client.chat.completions.create(
-        # model="gpt-4-1106-preview",
         model=model,
         temperature=0.3,
         response_format={"type": "json_object"},
