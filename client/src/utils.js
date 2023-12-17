@@ -1,4 +1,4 @@
-import OpenAI from "openai";
+import { SERVER } from "../axios";
 
 /**
  * Creates an empty game board of the specified size.
@@ -139,20 +139,6 @@ export const stringifyBoard = (board) => {
 
 
 export async function getMoveFromGPT(model="gpt-3.5-turbo-1106", board) {
-    const openai = new OpenAI({ apiKey: 'key', dangerouslyAllowBrowser: true});
-
-    const response = await openai.chat.completions.create({
-        model: model,
-        temperature: 0.2,
-        response_format: {"type": "json_object"},
-        messages: [
-            {"role": "system",
-             "content": "You are an opponent in a Tic-Tac-Toe game. You're playing as 'O' and your goal is to win. Suggest the indexes of the next move as 'row,col' in JSON format"},
-            {"role": "user",
-              "content": `Given the current Tic-Tac-Toe board:\n${stringifyBoard(board)}\nSuggest the most optimal next move for 'O' (as 'row,col'):`}
-        ],
-    });
-   
-    const data = await response.choices[0].message.content;
-    return JSON.parse(data);
+    const response = await SERVER.get('/gpt-move', { params: {model, board: stringifyBoard(board)}})
+    return JSON.parse(response.data);
 }
