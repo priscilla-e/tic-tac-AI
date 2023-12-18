@@ -50,7 +50,7 @@ function App() {
         if (isComTurn) {
             if (gameSettings.mode === 'GPT') {
                 // model: "gpt-4-1106-preview", 
-                const move = getMoveFromGPT(gameBoard, "gpt-4-1106-preview");
+                const move =  getMoveFromGPT(gameBoard, "gpt-3.5-turbo-1106");
                 move.then((move) => {
                     handleSelect(move.row, move.col);
                 });
@@ -63,7 +63,7 @@ function App() {
 
             return () => clearTimeout(comMoveTimeout);
         }
-    }, [isComTurn, gameBoard]);
+    }, [isComTurn, gameBoard, gameSettings.mode]);
 
     const handleSelect = (row, col) => {
         setGameBoard((prevBoard) => {

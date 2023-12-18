@@ -25,7 +25,7 @@ async def root():
 async def get_gpt_move(board: str, model: str = "gpt-3.5-turbo-1106"):
     response = client.chat.completions.create(
         model=model,
-        temperature=0.3,
+        temperature=0.4,
         response_format={"type": "json_object"},
         messages=[
             {"role": "system",
