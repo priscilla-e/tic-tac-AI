@@ -143,6 +143,60 @@ export const stringifyBoard = (board) => {
 }
 
 
+/**
+ * 
+ * @param {Array<Array<null|string>>} board 
+ * @param {number} depth 
+ * @param {boolean} isMaximizing 
+ * @returns {number} - The score of the best move.
+ */
+export const minimax = (board, depth, isMaximizing) => {
+
+    // Terminal states
+    const winner = checkWinner(board);
+    if (winner === 'X') {
+        return 1; // X maximizes
+    }
+    if (winner === 'O') {
+        return -1; // O minimizes
+    }
+    if (checkDraw(board)) {
+        return 0;
+    }
+
+    if (isMaximizing) {
+        let bestScore = -Infinity;
+        for (let i = 0; i < board.length; i++) {
+            for (let j = 0; j < board.length; j++){
+                if (board[i][j] === null) {
+                    board[i][j] = 'X';
+                    let score = minimax(board, depth + 1, false);
+                    board[i][j] = null;
+                    bestScore = Math.max(score, bestScore);
+                }
+            }
+        }
+    }
+    else {
+        let bestScore = Infinity;
+        for (let i = 0; i < board.length; i++) {
+            for (let j = 0; j < board.length; j++){
+                if (board[i][j] === null) {
+                    board[i][j] = 'O';
+                    let score = minimax(board, depth + 1, true);
+                    board[i][j] = null;
+                    bestScore = Math.min(score, bestScore);
+                }
+            }
+        }
+    }
+}
+
+const findBestMove = (board) => {
+
+}
+
+
 
 export async function getMoveFromGPT(board, model="gpt-3.5-turbo-1106") {
     try {
