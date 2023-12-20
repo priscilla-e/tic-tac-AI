@@ -176,6 +176,7 @@ export const minimax = (board, depth, isMaximizing) => {
                 }
             }
         }
+        return bestScore;
     }
     else {
         let bestScore = Infinity;
@@ -189,13 +190,29 @@ export const minimax = (board, depth, isMaximizing) => {
                 }
             }
         }
+        return bestScore;
     }
 }
 
-const findBestMove = (board) => {
-
+export const findBestMove = (board) => {
+    // O is the minimizing player
+    let bestScore = Infinity;
+    let bestMove = {row: -1, col: -1};
+    for (let i = 0; i < board.length; i++) {
+        for (let j = 0; j < board.length; j++) {
+            if (board[i][j] === null) {
+                board[i][j] = 'O';
+                let score = minimax(board, 0, true);
+                board[i][j] = null;
+                if (score < bestScore) {
+                    bestScore = score;
+                    bestMove = {row: i, col: j};
+                }
+            }
+        }
+    }
+    return bestMove;
 }
-
 
 
 export async function getMoveFromGPT(board, model="gpt-3.5-turbo-1106") {

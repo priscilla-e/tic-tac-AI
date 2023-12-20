@@ -12,6 +12,7 @@ import {
     getRandomEmptyCell,
     playAudio,
     getMoveFromGPT,
+    findBestMove,
 } from './utils.js';
 
 import clickSound from './assets/click-sound.wav';
@@ -56,7 +57,7 @@ function App() {
                 });
             } else if (gameSettings.mode === 'MINIMAX') {
                 comMoveTimeout = setTimeout(() => {
-                    const move = getRandomEmptyCell(gameBoard);
+                    const move = findBestMove(gameBoard);
                     handleSelect(move.row, move.col);
                 }, 1000);
             }
