@@ -150,8 +150,8 @@ export const stringifyBoard = (board) => {
  * @param {boolean} isMaximizing 
  * @returns {number} - The score of the best move.
  */
-export const minimax = (board, depth, isMaximizing) => {
-
+export const minimax = (board, depth, alpha, beta, isMaximizing) => {
+    console.log(`Depth: ${depth}`)
     // Terminal states
     const winner = checkWinner(board);
     if (winner === 'X') {
@@ -170,9 +170,13 @@ export const minimax = (board, depth, isMaximizing) => {
             for (let j = 0; j < board.length; j++){
                 if (board[i][j] === null) {
                     board[i][j] = 'X';
-                    let score = minimax(board, depth + 1, false);
+                    let score = minimax(board, depth + 1, alpha, beta,  false);
                     board[i][j] = null;
                     bestScore = Math.max(score, bestScore);
+                    alpha = Math.max(alpha, score);
+                    if (beta <= alpha) {
+                        break;
+                    }
                 }
             }
         }
@@ -184,9 +188,13 @@ export const minimax = (board, depth, isMaximizing) => {
             for (let j = 0; j < board.length; j++){
                 if (board[i][j] === null) {
                     board[i][j] = 'O';
-                    let score = minimax(board, depth + 1, true);
+                    let score = minimax(board, depth + 1, alpha, beta, true);
                     board[i][j] = null;
                     bestScore = Math.min(score, bestScore);
+                    beta = Math.min(beta, score);
+                    if (beta <= alpha) {
+                        break;
+                    }
                 }
             }
         }
@@ -202,7 +210,7 @@ export const findBestMove = (board) => {
         for (let j = 0; j < board.length; j++) {
             if (board[i][j] === null) {
                 board[i][j] = 'O';
-                let score = minimax(board, 0, true);
+                let score = minimax(board, 0, -Infinity, Infinity, true);
                 board[i][j] = null;
                 if (score < bestScore) {
                     bestScore = score;
