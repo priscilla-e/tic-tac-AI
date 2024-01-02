@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import Card from "./ui/Card.jsx";
 
-export default function GameMode({onSelectMode}) {
+export default function SelectMode({onSelectMode}) {
     return (
         <Card title='Select Game Mode'>
             <div className='mt-10 text-center space-x-10'>
@@ -24,6 +24,6 @@ export default function GameMode({onSelectMode}) {
     )
 }
 
-GameMode.propTypes = {
+SelectMode.propTypes = {
     onSelectMode: PropTypes.string.isRequired
 }
