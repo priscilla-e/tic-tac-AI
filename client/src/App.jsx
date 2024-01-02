@@ -17,6 +17,7 @@ import {
 
 import clickSound from './assets/click-sound.wav';
 import PlayNow from "./components/PlayNow.jsx";
+import GameMode from "./components/GameMode.jsx";
 
 const DEFAULT_SETTINGS = {
     mode: 'GPT', //GPT, MINIMAX, MULTI_PLAYER
@@ -33,7 +34,8 @@ function App() {
         <>
             <Header />
             <main className="container mx-auto px-2">
-                <PlayNow/>
+                {/*<PlayNow onPlay={() => console.log('play')}/>*/}
+                <GameMode onSelectMode={() => console.log('play')}/>
             </main>
         </>
     );
