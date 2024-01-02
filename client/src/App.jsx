@@ -1,41 +1,23 @@
 import { useEffect, useState } from 'react';
 import Header from './components/Header.jsx';
-import Player from './components/Player.jsx';
-import GameBoard from './components/GameBoard.jsx';
-import GameOver from './components/GameOver.jsx';
-import GameSettings from './components/GameSettings.jsx';
-
-import {
-    checkWinner,
-    checkDraw,
-    createEmptyGameBoard,
-    getRandomEmptyCell,
-    playAudio,
-    getMoveFromGPT,
-    findBestMove,
-} from './utils.js';
-
-import clickSound from './assets/click-sound.wav';
-import PlayNow from "./components/PlayNow.jsx";
-import GameMode from "./components/GameMode.jsx";
-
-const DEFAULT_SETTINGS = {
-    mode: 'GPT', //GPT, MINIMAX, MULTI_PLAYER
-    boardSize: 3,
-    allowAudio: true,
-};
-
-const COM_NAMES = ['GPT', 'MINIMAX'];
-
-let comMoveTimeout;
+import PlayNow from './components/PlayNow.jsx';
+import GameMode from './components/GameMode.jsx';
 
 function App() {
+    const [page, setPage] = useState(0);
+    const [mode , setMode] = useState('single');
+
+    const handleGameMode = (mode) => {
+        setMode(mode);
+        setPage(2);
+    }
+
     return (
         <>
             <Header />
             <main className="container mx-auto px-2">
-                {/*<PlayNow onPlay={() => console.log('play')}/>*/}
-                <GameMode onSelectMode={() => console.log('play')}/>
+                {page === 0 && <PlayNow onPlay={() => setPage(1)}/>}
+                {page === 1 && <GameMode onSelectMode={handleGameMode}/>}
             </main>
         </>
     );

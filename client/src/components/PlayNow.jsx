@@ -10,6 +10,7 @@ export default function PlayNow({onPlay}) {
             </p>
             <div className="flex items-center justify-center mt-14">
                 <button
+                    type='button'
                     className='border-2 border-lightYellow bg-black font-bold animate-bounce mx-auto px-6 py-2 focus:outline-none'
                     onClick={onPlay}
                 >
