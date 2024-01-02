@@ -1,17 +1,11 @@
 import {createContext} from "react";
-import {createEmptyGameBoard} from "../utils.js";
 
-const INITIAL_SETTINGS = {
-    difficulty: 'easy', //easy, medium, hard
-    boardSize: 3, //3, 4, 5
-    allowAudio: true,
-}
 
 const GameContext = createContext({
-    page: localStorage.getItem('page') || 0,
-    mode: localStorage.getItem('mode') || 'single',
-    settings: localStorage.getItem('settings') || INITIAL_SETTINGS,
-    board: localStorage.getItem('board') || createEmptyGameBoard(INITIAL_SETTINGS.boardSize),
+    page: localStorage.page || 0,
+    mode: localStorage.mode || null,
+    settings: localStorage.settings ? JSON.parse(localStorage.settings) : null,
+    board: localStorage.board ? JSON.parse(localStorage.board) : null,
     setPage: () => {},
     setMode: () => {},
     setSettings: () => {},

@@ -1,23 +1,24 @@
-import { useEffect, useState } from 'react';
+import {useContext} from 'react';
 import Header from './components/Header.jsx';
 import PlayNow from './components/PlayNow.jsx';
 import GameMode from './components/GameMode.jsx';
+import GameContext from './contexts/game-context.jsx';
 
 function App() {
-    const [page, setPage] = useState(0);
-    const [mode , setMode] = useState('single');
+    const ctx = useContext(GameContext);
+
 
     const handleGameMode = (mode) => {
-        setMode(mode);
-        setPage(2);
+        ctx.setMode(mode)
+        ctx.setPage(2);
     }
 
     return (
         <>
-            <Header />
+            <Header/>
             <main className="container mx-auto px-2">
-                {page === 0 && <PlayNow onPlay={() => setPage(1)}/>}
-                {page === 1 && <GameMode onSelectMode={handleGameMode}/>}
+                {ctx.page === 0 && <PlayNow onPlay={() => ctx.setPage(1)}/>}
+                {ctx.page === 1 && <GameMode onSelectMode={handleGameMode}/>}
             </main>
         </>
     );
