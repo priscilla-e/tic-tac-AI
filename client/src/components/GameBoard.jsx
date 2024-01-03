@@ -5,6 +5,7 @@ export default function GameBoard({onSelect, isComTurn}) {
     const ctx = useContext(GameContext);
 
     let classes = 'grid grid-cols-3 gap-3 max-w-lg mx-auto mt-8 md:gap-6';
+
     if (ctx.board?.length === 4) {
         classes = 'grid grid-cols-4 gap-3 max-w-lg mx-auto mt-8 md:gap-6';
     }

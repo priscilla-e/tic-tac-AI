@@ -48,8 +48,8 @@ export default function SelectSettings() {
 
 
         const settings = {
-            player1,
-            player2,
+            X: player1.toUpperCase(),
+            O: player2.toUpperCase(),
             difficulty,
             boardSize: +boardSize,
             allowAudio: true,
@@ -133,8 +133,6 @@ export default function SelectSettings() {
                     </button>
                 </div>
             </form>
-
-
         </Card>
     )
 }
