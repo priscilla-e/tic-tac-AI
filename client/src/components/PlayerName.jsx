@@ -23,7 +23,7 @@ export default function PlayerName({name, symbol, isActive}) {
 }
 
 
-PlayerName.proptype = {
+PlayerName.propTypes = {
     name: PropTypes.string.isRequired,
     symbol: PropTypes.string.isRequired,
     isActive: PropTypes.bool.isRequired,

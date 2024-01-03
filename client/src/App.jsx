@@ -49,10 +49,11 @@ function App() {
             }, 1000) // 1 second delay
         } else if (ctx.settings.difficulty === 'medium') {
             // Use GPT algorithm
-
+            // TODO: Implement GPT algorithm
 
         } else if (ctx.settings.difficulty === 'hard') {
             // Use Minimax algorithm
+            // TODO: Implement Minimax algorithm
         }
 
         // clean up

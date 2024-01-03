@@ -13,18 +13,18 @@ export default function SelectSettings() {
     const [boardSize, setBoardSize] = useState(3);
     const [err, setErr] = useState(null);
 
+    // Set Com Player Name  programmatically if in single player mode
     useEffect(() => {
-        // Set Com Player Name if in single player mode
-        if (ctx.mode === 'single') {
-            if (difficulty === 'easy') {
-                setPlayer2('COM1-RANDOM')
-            }
-            else if (difficulty === 'medium') {
-                setPlayer2('COM2-GPT')
-            }
-            else if (difficulty === 'hard') {
-                setPlayer2('COM3-MINIMAX')
-            }
+        if (ctx.mode !== 'single') return;
+
+        if (difficulty === 'easy') {
+            setPlayer2('RANDOM')
+        }
+        else if (difficulty === 'medium') {
+            setPlayer2('GPT')
+        }
+        else if (difficulty === 'hard') {
+            setPlayer2('MINIMAX')
         }
     }, [ctx.mode, difficulty])
 
