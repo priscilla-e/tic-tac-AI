@@ -54,8 +54,16 @@ export default function SelectSettings() {
             allowAudio: true,
         };
 
-        console.log(settings);
+        // Save game settings and start game
+        ctx.setSettings(settings);
+        ctx.setPage((curPage) => curPage + 1); // Go to game page
     }
+
+    const handleBack = () => {
+        ctx.setPage((curPage) => curPage - 1);
+        ctx.setMode(null);
+    }
+
     return (
         <Card title='Select Settings'>
             <p className='my-2 text-center text-xs text-red-800'>{err}</p>
@@ -111,7 +119,7 @@ export default function SelectSettings() {
                     <button
                         type='button'
                         className='border-2 border-lightYellow bg-black font-bold mx-auto px-6 py-2 focus:outline-none'
-                        onClick={() => ctx.setPage((curPage) => curPage - 1)}
+                        onClick={handleBack}
                     >
                         Back
                     </button>
