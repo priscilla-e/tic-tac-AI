@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Header from './components/layout/Header.jsx';
-import Player from './components/legacy/Player.jsx';
-import GameBoard from './components/legacy/GameBoard.jsx';
+import Player from './components/PlayerName.jsx';
+import GameBoard from './components/GameBoard.jsx';
 import GameOver from './components/GameOver.jsx';
 import GameSettings from './components/legacy/GameSettings.jsx';
 

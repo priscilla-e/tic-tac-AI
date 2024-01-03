@@ -1,6 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 import Card from "./ui/Card.jsx";
 import GameContext from "../contexts/game-context.jsx";
+import {createEmptyGameBoard} from "../utils.js";
 
 export default function SelectSettings() {
     const ctx = useContext(GameContext);
@@ -56,7 +57,8 @@ export default function SelectSettings() {
 
         // Save game settings and start game
         ctx.setSettings(settings);
-        ctx.setPage((curPage) => curPage + 1); // Go to game page
+        ctx.setBoard(createEmptyGameBoard(boardSize)); // set game board
+        ctx.setPage((curPage) => curPage + 1); // go to game page
     }
 
     const handleBack = () => {
