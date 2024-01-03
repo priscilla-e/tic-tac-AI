@@ -10,6 +10,7 @@ export default function SelectMode() {
         ctx.setMode(mode)
         ctx.setPage((curPage) => curPage + 1);
     }
+
     return (
         <Card>
             <p className='text-center text-lg '>
@@ -21,14 +22,14 @@ export default function SelectMode() {
             <div className='text-center space-x-10'>
                 <button
                     type='button'
-                    className='border-2 animate-ping border-lightYellow bg-black font-bold mx-auto px-6 py-2 focus:outline-none'
+                    className='border-2 border-lightYellow bg-black font-bold mx-auto px-6 py-2 focus:outline-none'
                     onClick={() => handleGameMode('single')}
                 >
                     Single Player
                 </button>
                 <button
                     type='button'
-                    className='border-2 animate-ping border-lightYellow bg-black font-bold mx-auto px-6 py-2 focus:outline-none'
+                    className='border-2 border-lightYellow bg-black font-bold mx-auto px-6 py-2 focus:outline-none'
                     onClick={() => handleGameMode('multi')}
                 >
                     Multi Player

@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import GameContext from "./game-context.jsx";
 
 // const INITIAL_SETTINGS = {
+//     player1: null,
+//     player2: null,
 //     difficulty: 'easy', //easy, medium, hard
 //     boardSize: 3, //3, 4, 5
 //     allowAudio: true,
