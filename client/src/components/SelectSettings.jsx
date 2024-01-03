@@ -1,5 +1,6 @@
 import {useContext, useEffect, useState} from "react";
 import Card from "./ui/Card.jsx";
+import Button from "./ui/Button.jsx";
 import GameContext from "../contexts/game-context.jsx";
 import {createEmptyGameBoard} from "../utils.js";
 
@@ -117,20 +118,19 @@ export default function SelectSettings() {
                     </select>
                 </div>
 
-                <div className='mt-10 flex justify-between'>
-                    <button
+                <div className='mt-10 flex justify-between p-0'>
+                    <Button
                         type='button'
-                        className='border-2 border-lightYellow bg-black font-bold mx-auto px-6 py-2 focus:outline-none'
                         onClick={handleBack}
                     >
                         Back
-                    </button>
-                    <button
+                    </Button>
+                    <Button
                         type='submit'
-                        className='border-2 border-lightYellow bg-black font-bold mx-auto px-6 py-2 focus:outline-none'
+                        onClick={() => console.log('hello')}
                     >
                         Start Game
-                    </button>
+                    </Button>
                 </div>
             </form>
         </Card>

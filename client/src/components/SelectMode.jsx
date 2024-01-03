@@ -1,6 +1,7 @@
 import Card from "./ui/Card.jsx";
 import {useContext} from "react";
 import GameContext from "../contexts/game-context.jsx";
+import Button from "./ui/Button.jsx";
 
 
 export default function SelectMode() {
@@ -20,20 +21,18 @@ export default function SelectMode() {
 
             <p className='my-10 text-center text-2xl font-bold'>Select Game Mode</p>
             <div className='text-center space-x-10'>
-                <button
+                <Button
                     type='button'
-                    className='border-2 border-lightYellow bg-black font-bold mx-auto px-6 py-2 focus:outline-none'
                     onClick={() => handleGameMode('single')}
                 >
                     Single Player
-                </button>
-                <button
+                </Button>
+                <Button
                     type='button'
-                    className='border-2 border-lightYellow bg-black font-bold mx-auto px-6 py-2 focus:outline-none'
                     onClick={() => handleGameMode('multi')}
                 >
                     Multi Player
-                </button>
+                </Button>
             </div>
         </Card>
     )
