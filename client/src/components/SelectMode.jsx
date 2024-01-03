@@ -25,5 +25,5 @@ export default function SelectMode({onSelectMode}) {
 }
 
 SelectMode.propTypes = {
-    onSelectMode: PropTypes.string.isRequired
+    onSelectMode: PropTypes.func.isRequired
 }
