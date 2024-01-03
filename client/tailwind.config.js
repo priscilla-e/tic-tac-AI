@@ -30,6 +30,9 @@ export default {
       boxShadow: {
         'custom': '0 0 15px rgba(0, 0, 0, 0.5)'
       },
+      animation: {
+        'fade-in': 'fade-in 1s ease-in-out',
+      },
     },
   },
   plugins: [],

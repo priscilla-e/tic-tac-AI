@@ -59,9 +59,7 @@ function App() {
         return () => {
             clearTimeout(comTimeoutRef.current)
         }
-
-
-    }, [isComTurn])
+    }, [isComTurn, ctx.board, ctx.settings.difficulty])
 
     return (
         <>
