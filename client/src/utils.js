@@ -18,6 +18,29 @@ export const createEmptyGameBoard = (size = 3) => {
     return gameBoard
 }
 
+/**
+ * Check for next turn on the provided game board.
+ * @param {Array<Array<null|string>>} board - The game board represented as a 2D array.
+ * @returns {string}
+ */
+export const checkTurn = (board) => {
+    let xCount = 0;
+    let oCount = 0;
+
+    board.forEach(row => {
+        row.forEach(col => {
+            if (col === 'X') {
+                xCount++;
+            }
+            else if (col === 'O') {
+                oCount++;
+            }
+        })
+    })
+
+    return xCount > oCount ? 'O' : 'X';
+}
+
 
 /**
  * Checks for a winner on the provided game board.
