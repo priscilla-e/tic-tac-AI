@@ -17,8 +17,17 @@ export default function GameOver({ winner }) {
     }
 
     const handleRematch = () => {
+        // Reset game board
         const newBoard = createEmptyGameBoard(ctx.settings.boardSize);
         ctx.setBoard(newBoard);
+    }
+
+    const handleStartOver = () => {
+        // Reset everything in game context
+        ctx.setPage(0);
+        ctx.setMode(null);
+        ctx.setSettings(null);
+        ctx.setBoard(null);
     }
 
     return (
@@ -32,10 +41,16 @@ export default function GameOver({ winner }) {
             >
                 Rematch!
             </button>
+            <button
+                className="px-4 py-1 border-2 rounded-sm focus:outline-none"
+                onClick={handleStartOver}
+            >
+                Start Over!
+            </button>
         </div>
     );
 }
 
 GameOver.propTypes = {
-    winner: PropTypes.string.isRequired
+    winner: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])]),
 }
