@@ -54,7 +54,7 @@ function App() {
                                 <PlayerName name={ctx.settings['O']} symbol='O' isActive={false}/>
                             </div>
                             <GameBoard isComTurn={false} onSelect={handleSelect}/>
-                            {winner || isDraw && <GameOver winner={winner} />}
+                            {(winner || isDraw) && <GameOver winner={winner} />}
                         </Card>
                     </div>
                 }
