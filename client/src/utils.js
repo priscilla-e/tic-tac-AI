@@ -21,7 +21,7 @@ export const createEmptyGameBoard = (size = 3) => {
 /**
  * Check for next turn on the provided game board.
  * @param {Array<Array<null|string>>} board - The game board represented as a 2D array.
- * @returns {string}
+ * @returns {string} - Symbol of the next turn ('X' or 'O').
  */
 export const checkTurn = (board) => {
     let xCount = 0;
@@ -40,7 +40,6 @@ export const checkTurn = (board) => {
 
     return xCount > oCount ? 'O' : 'X';
 }
-
 
 /**
  * Checks for a winner on the provided game board.
@@ -96,7 +95,6 @@ export const checkWinner = (board) => {
     return null; // No winner
 }
 
-
 /**
  * Checks if the game board is in a draw state.
  *
@@ -112,6 +110,16 @@ export const checkDraw = (gameBoard) => {
     }
     return true;
 };
+
+/**
+ * Plays the provided audio.
+ *
+ * @param {string} audio - The audio file path to play.
+ */
+export const playAudio = (audio) => {
+    const audioElement = new Audio(audio);
+    audioElement.play();
+}
 
 
 /**
@@ -131,16 +139,6 @@ export function getRandomEmptyCell(board) {
     }
     const randomIndex = Math.floor(Math.random() * emptyCells.length);
     return emptyCells[randomIndex];
-}
-
-/**
- * Plays the provided audio.
- *
- * @param {string} audio - The audio file path to play.
- */
-export const playAudio = (audio) => {
-    const audioElement = new Audio(audio);
-    audioElement.play();
 }
 
 
