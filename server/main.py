@@ -38,6 +38,7 @@ async def get_gpt_move(board, model: str = "gpt-3.5-turbo-1106"):
         model=model,
         temperature=0.4,
         response_format={"type": "json_object"},
+        max_tokens=150,
         messages=[
             {"role": "system",
              "content": f"You are an opponent in a {size}x{size} Tic-Tac-Toe game. You're playing as 'O' and your goal is to win. Suggest the indexes of the next move as 'row,col' in JSON format. Do not suggest cells that are already occupied."},
@@ -45,6 +46,7 @@ async def get_gpt_move(board, model: str = "gpt-3.5-turbo-1106"):
              "content": f"Given the current Tic-Tac-Toe board:\n{board}\nMake the next move for 'O':"},
         ],
     )
+    print(response)
     move = response.choices[0].message.content
     return move
 
