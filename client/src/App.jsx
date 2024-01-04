@@ -18,6 +18,8 @@ import {
     getMoveFromMinimax
 } from "./utils.js";
 import clickSound from './assets/click-sound.wav';
+import { HiMiniSpeakerWave } from "react-icons/hi2";
+import StatusBar from "./components/StatusBar.jsx";
 
 function App() {
     console.log('App')
@@ -94,23 +96,7 @@ function App() {
 
                 {ctx.page === 2 &&
                     <div className='space-y-2'>
-                        <Card>
-                            <div className='flex justify-between'>
-                                <div>
-                                    <span className="font-bold">Mode: </span>
-                                    <span className="capitalize">{ctx.mode + ' Player'}</span>
-                                </div>
-                                <div>
-                                    <span className="font-bold">Difficulty: </span>
-                                    <span className="capitalize">{ctx.settings.difficulty}</span>
-                                </div>
-                                <div>
-                                    <span className="font-bold">Board Size: </span>
-                                    <span className="capitalize">{ctx.settings.boardSize}</span>
-                                </div>
-
-                            </div>
-                        </Card>
+                        <StatusBar />
                         <Card>
                             <div className="flex">
                                 <PlayerName name={ctx.settings['X']} symbol='X' isActive={turn === 'X'}/>
