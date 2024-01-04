@@ -151,3 +151,13 @@ export async function getMoveFromGPT(board) {
         console.log(err);
     }
 }
+
+export async function getMoveFromMinimax(board){
+    try {
+        const response = await SERVER.get('/minimax-move', {params: {board: JSON.stringify(board)}})
+        return response.data
+    }
+    catch (err) {
+        console.log(err)
+    }
+}

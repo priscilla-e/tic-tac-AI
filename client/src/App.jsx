@@ -8,7 +8,15 @@ import Card from "./components/ui/Card.jsx";
 import PlayerName from "./components/PlayerName.jsx";
 import GameBoard from "./components/GameBoard.jsx";
 import GameOver from "./components/GameOver.jsx";
-import {checkDraw, getNextTurn, checkWinner, getRandomEmptyCell, playAudio, getMoveFromGPT} from "./utils.js";
+import {
+    checkDraw,
+    getNextTurn,
+    checkWinner,
+    getRandomEmptyCell,
+    playAudio,
+    getMoveFromGPT,
+    getMoveFromMinimax
+} from "./utils.js";
 import clickSound from './assets/click-sound.wav';
 
 function App() {
@@ -44,17 +52,25 @@ function App() {
         async function getComMove() {
             if (ctx.settings.difficulty === 'easy') {
                 // Use random algorithm
-               return new Promise((resolve) => {
+                return new Promise((resolve) => {
                     comTimeoutRef.current = setTimeout(() => {
                         resolve(getRandomEmptyCell(ctx.board))
                     }, 1000)
-               })
+                })
             } else if (ctx.settings.difficulty === 'medium') {
                 // Use GPT algorithm
                 return getMoveFromGPT(ctx.board)
             } else if (ctx.settings.difficulty === 'hard') {
                 // Use Minimax algorithm
-                // TODO: Implement Minimax algorithm
+                let timeout = 500
+                if (ctx.board.length < 5) {
+                    timeout = 1000 // board 3x3 and 4x4 take less time to evaluate
+                }
+                return new Promise((resolve) => {
+                    comTimeoutRef.current = setTimeout(() => {
+                        resolve(getMoveFromMinimax(ctx.board))
+                    }, timeout)
+                })
             }
         }
 
