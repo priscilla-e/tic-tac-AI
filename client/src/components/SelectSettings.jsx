@@ -19,11 +19,9 @@ export default function SelectSettings() {
 
         if (difficulty === 'easy') {
             setPlayer2('RANDOM')
-        }
-        else if (difficulty === 'medium') {
+        } else if (difficulty === 'medium') {
             setPlayer2('GPT')
-        }
-        else if (difficulty === 'hard') {
+        } else if (difficulty === 'hard') {
             setPlayer2('MINIMAX')
         }
     }, [ctx.mode, difficulty])
@@ -51,7 +49,7 @@ export default function SelectSettings() {
         const settings = {
             X: player1.toUpperCase(),
             O: player2.toUpperCase(),
-            difficulty,
+            difficulty, // Used only in single player mode
             boardSize: +boardSize,
             allowAudio: true,
         };
@@ -91,19 +89,22 @@ export default function SelectSettings() {
                         />
                     </div>
                 )}
-                <div className="flex items-center justify-between space-y-2">
-                    <label htmlFor="difficulty">Difficulty</label>
-                    <select
-                        name='difficulty'
-                        value={difficulty}
-                        className='w-8/12 px-2 py-2 text-sm text-smoke uppercase bg-darkEarth focus:outline-none md:py-4 md:px-4'
-                        onChange={(e) => setDifficulty(e.target.value)}
-                    >
-                        <option value='easy'>Easy - Random</option>
-                        <option value='medium'>Medium - Gpt</option>
-                        <option value='hard'>Hard - Minimax</option>
-                    </select>
-                </div>
+
+                {ctx.mode === 'single' && (
+                    <div className="flex items-center justify-between space-y-2">
+                        <label htmlFor="difficulty">Difficulty</label>
+                        <select
+                            name='difficulty'
+                            value={difficulty}
+                            className='w-8/12 px-2 py-2 text-sm text-smoke uppercase bg-darkEarth focus:outline-none md:py-4 md:px-4'
+                            onChange={(e) => setDifficulty(e.target.value)}
+                        >
+                            <option value='easy'>Easy - Random</option>
+                            <option value='medium'>Medium - Gpt</option>
+                            <option value='hard'>Hard - Minimax</option>
+                        </select>
+                    </div>)
+                }
                 <div className="flex items-center justify-between space-y-2">
                     <label htmlFor="boardsize">Board size</label>
                     <select
