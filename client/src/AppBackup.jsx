@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import Header from './components/layout/Header.jsx';
-import Player from './components/PlayerName.jsx';
-import GameBoard from './components/GameBoard.jsx';
-import GameOver from './components/GameOver.jsx';
+import Player from './components/game/GamePlayer.jsx';
+import GameBoard from './components/game/GameBoard.jsx';
+import GameOver from './components/game/GameOver.jsx';
 import GameSettings from './components/legacy/GameSettings.jsx';
 
 import {
@@ -74,7 +74,7 @@ function App() {
             return newBoard;
         });
 
-        // Play click sound
+        // Game click sound
         if (gameSettings.allowAudio) {
             playAudio(clickSound);
         }

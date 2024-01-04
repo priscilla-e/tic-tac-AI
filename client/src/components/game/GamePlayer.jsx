@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-export default function PlayerName({name, symbol, isActive}) {
+export default function GamePlayer({name, symbol, isActive}) {
     return (
         <>
             <div
@@ -23,7 +23,7 @@ export default function PlayerName({name, symbol, isActive}) {
 }
 
 
-PlayerName.propTypes = {
+GamePlayer.propTypes = {
     name: PropTypes.string.isRequired,
     symbol: PropTypes.string.isRequired,
     isActive: PropTypes.bool.isRequired,

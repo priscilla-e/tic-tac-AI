@@ -1,5 +1,5 @@
 import {useContext} from 'react';
-import GameContext from '../contexts/game-context.jsx';
+import GameContext from '../../contexts/game-context.jsx';
 import PropTypes from "prop-types";
 
 export default function GameBoard({onSelect, isComTurn}) {

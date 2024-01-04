@@ -114,7 +114,7 @@ export const checkDraw = (gameBoard) => {
 /**
  * Plays the provided audio.
  *
- * @param {string} audio - The audio file path to play.
+ * @param {string} audio - The audio file path to game.
  */
 export const playAudio = (audio) => {
     const audioElement = new Audio(audio);

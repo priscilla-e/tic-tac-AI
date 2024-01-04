@@ -1,8 +1,8 @@
 import {useContext} from "react";
-import GameContext from '../contexts/game-context.jsx'
+import GameContext from '../../contexts/game-context.jsx'
 import {HiMiniSpeakerWave, HiMiniSpeakerXMark} from "react-icons/hi2";
 
-export default function StatusBar() {
+export default function GameStatus() {
     const ctx = useContext(GameContext)
 
     const handleAudio = () => {

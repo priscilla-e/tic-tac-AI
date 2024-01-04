@@ -1,8 +1,8 @@
 import {useContext} from "react";
-import GameContext from "../contexts/game-context.jsx";
-import {createEmptyGameBoard, playAudio} from '../utils';
-import winSound from '../assets/win-sound.wav';
-import drawSound from '../assets/draw-sound.wav';
+import GameContext from "../../contexts/game-context.jsx";
+import {createEmptyGameBoard, playAudio} from '../../utils.js';
+import winSound from '../../assets/win-sound.wav';
+import drawSound from '../../assets/draw-sound.wav';
 import PropTypes from "prop-types";
 
 export default function GameOver({ winner }) {
