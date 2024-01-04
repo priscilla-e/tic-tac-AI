@@ -8,7 +8,7 @@ import Card from "./components/ui/Card.jsx";
 import PlayerName from "./components/PlayerName.jsx";
 import GameBoard from "./components/GameBoard.jsx";
 import GameOver from "./components/GameOver.jsx";
-import {checkDraw, checkTurn, checkWinner, getRandomEmptyCell, playAudio} from "./utils.js";
+import {checkDraw, getNextTurn, checkWinner, getRandomEmptyCell, playAudio, getMoveFromGPT} from "./utils.js";
 import clickSound from './assets/click-sound.wav';
 
 function App() {
@@ -16,13 +16,13 @@ function App() {
     const ctx = useContext(GameContext);
     let comTimeoutRef = useRef(null);
 
-    let turn = null;
+    let turn = null // Whose turn is it? X or O
     let winner = null;
     let isDraw = null;
     let isComTurn = null
 
     if (ctx.board) {
-        turn = checkTurn(ctx.board);
+        turn = getNextTurn(ctx.board);
         winner = checkWinner(ctx.board);
         isDraw = !winner && checkDraw(ctx.board)
         isComTurn = !winner && !isDraw && ctx.mode === 'single' && turn === 'O';
@@ -41,20 +41,26 @@ function App() {
     useEffect(() => {
         if (!isComTurn) return;
 
-        if (ctx.settings.difficulty === 'easy') {
-            // Use random algorithm
-            comTimeoutRef.current = setTimeout(() => {
-                const move = getRandomEmptyCell(ctx.board)
-                handleSelect(move.row, move.col);
-            }, 1000) // 1 second delay
-        } else if (ctx.settings.difficulty === 'medium') {
-            // Use GPT algorithm
-            // TODO: Implement GPT algorithm
-
-        } else if (ctx.settings.difficulty === 'hard') {
-            // Use Minimax algorithm
-            // TODO: Implement Minimax algorithm
+        async function getComMove() {
+            if (ctx.settings.difficulty === 'easy') {
+                // Use random algorithm
+               return new Promise((resolve) => {
+                    comTimeoutRef.current = setTimeout(() => {
+                        resolve(getRandomEmptyCell(ctx.board))
+                    }, 1000)
+               })
+            } else if (ctx.settings.difficulty === 'medium') {
+                // Use GPT algorithm
+                return getMoveFromGPT(ctx.board)
+            } else if (ctx.settings.difficulty === 'hard') {
+                // Use Minimax algorithm
+                // TODO: Implement Minimax algorithm
+            }
         }
+
+        getComMove().then((move) => {
+            handleSelect(move.row, move.col)
+        });
 
         // clean up
         return () => {
@@ -71,7 +77,24 @@ function App() {
                 {ctx.page === 1 && <SelectSettings/>}
 
                 {ctx.page === 2 &&
-                    <div>
+                    <div className='space-y-2'>
+                        <Card>
+                            <div className='flex justify-between'>
+                                <div>
+                                    <span className="font-bold">Mode: </span>
+                                    <span className="capitalize">{ctx.mode + ' Player'}</span>
+                                </div>
+                                <div>
+                                    <span className="font-bold">Difficulty: </span>
+                                    <span className="capitalize">{ctx.settings.difficulty}</span>
+                                </div>
+                                <div>
+                                    <span className="font-bold">Board Size: </span>
+                                    <span className="capitalize">{ctx.settings.boardSize}</span>
+                                </div>
+
+                            </div>
+                        </Card>
                         <Card>
                             <div className="flex">
                                 <PlayerName name={ctx.settings['X']} symbol='X' isActive={turn === 'X'}/>

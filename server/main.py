@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from openai import OpenAI
 from config import settings
 from fastapi.middleware.cors import CORSMiddleware
-
+import json
 
 app = FastAPI()
 app.add_middleware(
@@ -22,14 +22,17 @@ async def root():
 
 
 @app.get("/gpt-move")
-async def get_gpt_move(board: str, model: str = "gpt-3.5-turbo-1106"):
+async def get_gpt_move(board, model: str = "gpt-3.5-turbo-1106"):
+    board = json.loads(board)
+    size = len(board)
+
     response = client.chat.completions.create(
         model=model,
         temperature=0.4,
         response_format={"type": "json_object"},
         messages=[
             {"role": "system",
-             "content": "You are an opponent in a Tic-Tac-Toe game. You're playing as 'O' and your goal is to p. Suggest the indexes of the next move as 'row,col' in JSON format"},
+             "content": f"You are an opponent in a {size}x{size} Tic-Tac-Toe game. You're playing as 'O' and your goal is to win. Suggest the indexes of the next move as 'row,col' in JSON format. Do not suggest cells that are already occupied."},
             {"role": "user",
              "content": f"Given the current Tic-Tac-Toe board:\n{board}\nMake the next move for 'O':"},
         ],
