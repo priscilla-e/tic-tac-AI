@@ -19,11 +19,11 @@ export const createEmptyGameBoard = (size = 3) => {
 }
 
 /**
- * Check for next turn on the provided game board.
+ * Given a game board, return the next eligible player.
  * @param {Array<Array<null|string>>} board - The game board represented as a 2D array.
  * @returns {string} - Symbol of the next turn ('X' or 'O').
  */
-export const checkTurn = (board) => {
+export const getNextTurn = (board) => {
     let xCount = 0;
     let oCount = 0;
 
