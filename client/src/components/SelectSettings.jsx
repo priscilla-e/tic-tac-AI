@@ -128,7 +128,6 @@ export default function SelectSettings() {
                     </Button>
                     <Button
                         type='submit'
-                        onClick={() => console.log('hello')}
                     >
                         Start Game
                     </Button>

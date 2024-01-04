@@ -13,6 +13,6 @@ export default function Button({children, onClick, ...props }) {
 }
 
 Button.propTypes = {
-    children: PropTypes.node.isRequired,
-    onClick: PropTypes.func.isRequired,
+    children: PropTypes.node,
+    onClick: PropTypes.func,
 }
