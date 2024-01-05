@@ -11,7 +11,7 @@
 }
 
 body {
-    @apply bg-radial-custom min-h-[95vh] relative;
+    @apply  bg-radial-custom max-h-screen relative;
 }
 
 /* Custom animations */
