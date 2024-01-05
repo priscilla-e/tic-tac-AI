@@ -1,9 +1,7 @@
 # Tic-tac-~~toe~~AI
 
 Tic-tac-AI is an enhanced Tic-tac-toe game that utilizes AI and Game Theory to enhance your gaming experience. 
-I started this project to explore the performance of OpenAI's models in games. Over the course of the development process,  
-I also dived into Game Theory, learning about power  learnt about game theory
-and powerful algorithms like Minimax. 
+I started this project to explore the performance of OpenAI's models in games. Over the course of the development process, I also dived into Game Theory, learning about powerful algorithms like Minimax. 
 
 # Preview
 **Live Demo:  https://example.com**
@@ -11,15 +9,15 @@ and powerful algorithms like Minimax.
 <Demo Video Here>
 
 # Features
-## 1. Multiple Board Sizes
+## Multiple Board Sizes
 Ever played a Tic-tac-toe on a 4x4 board? Well now you can!  
 Tic-tac-AI comes with 3x3, 4x4, and 5x5 boards!
 
-## 2. Multi Player Mode
+## Multi Player Mode
 
 Play against friends in local multiplayer mode. Enjoy the timeless experience of competing with someone sitting right next to you.
 
-## 3. Single Player Mode
+## Single Player Mode
 Challenge yourself against computer opponents with varying levels of difficulty:
 
 * **Easy**: The computer player uses a random algorithm to simulate moves, providing a straightforward and beginner-friendly opponent.
@@ -29,10 +27,10 @@ Challenge yourself against computer opponents with varying levels of difficulty:
 * **Hard**: Implements the Minimax algorithm with alpha-beta pruning optimization, offering a highly strategic and formidable opponent.
 
 
-# Minimax + Alpha Beta Prunning 
+## Minimax + Alpha Beta Prunning 
 Lorem
 
-# Open AI 
+## Open AI 
 Lorem
 
 # Technologies
