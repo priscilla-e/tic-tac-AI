@@ -19,12 +19,12 @@ import clickSound from "../../assets/click-sound.wav";
 
 export default function Game() {
     const ctx = useContext(GameContext);
-    let comTimeoutRef = useRef(null);
 
     let turn = null // Whose turn is it? X or O
     let winner = null;
     let isDraw = null;
     let isComTurn = null
+    let comTimeoutRef = useRef(null);
 
     if (ctx.board) {
         turn = getNextTurn(ctx.board);
