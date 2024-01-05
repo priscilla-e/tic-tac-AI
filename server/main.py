@@ -1,3 +1,4 @@
+import uvicorn
 from fastapi import FastAPI
 from openai import OpenAI
 from config import settings
@@ -62,3 +63,7 @@ def get_minimax_move(board):
 
     print(board)
     return find_best_move(board, 3)
+
+
+if __name__ == "__main__":
+    uvicorn.run("server:main", host="0.0.0.0", port=8000, reload=True)
