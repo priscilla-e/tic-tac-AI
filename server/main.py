@@ -9,8 +9,7 @@ from utils import find_best_move
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "https://localhost:5173", "http://tic-tac-ai-nu.vercel.app/",
-                   "https://tic-tac-ai-nu.vercel.app/"],
+    allow_origins=["http://localhost:5173", "https://localhost:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
