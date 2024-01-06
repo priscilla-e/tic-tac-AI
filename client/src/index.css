@@ -12,8 +12,7 @@
 
 
 body {
-    height: 95vh;
-    @apply  bg-radial-custom relative;
+    @apply bg-radial-custom relative;
 }
 
 /* Custom animations */

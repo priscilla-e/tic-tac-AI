@@ -12,7 +12,7 @@ function App() {
     return (
         <>
             <Header/>
-            <main className="container mx-auto px-2">
+            <main className="container mx-auto px-2 ">
                 {ctx.page === 0 && <SelectMode/>}
 
                 {ctx.page === 1 && <SelectSettings/>}

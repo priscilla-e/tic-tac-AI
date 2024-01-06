@@ -84,7 +84,7 @@ export default function SelectSettings() {
                         <input
                             value={player2}
                             type="text" name='player2' id='player2' placeholder='name'
-                            className="w-8/12 p-2 text-sm text-smoke uppercase bg-darkEarth md:py-4 focus:outline-none"
+                            className="w-8/12 rounded-none p-2 text-sm text-smoke uppercase bg-darkEarth md:py-4 focus:outline-none"
                             onChange={(e) => setPlayer2(e.target.value)}
                         />
                     </div>
@@ -97,7 +97,7 @@ export default function SelectSettings() {
                             id='difficulty'
                             name='difficulty'
                             value={difficulty}
-                            className='w-8/12 block rounded-none p-2 text-sm text-smoke uppercase bg-darkEarth md:p-4 focus:outline-none'
+                            className='w-8/12 block rounded-none px-2 py-4 text-sm text-smoke uppercase bg-darkEarth md:p-4 focus:outline-none'
                             onChange={(e) => setDifficulty(e.target.value)}
                         >
                             <option value='easy'>Easy - Random</option>
@@ -112,7 +112,7 @@ export default function SelectSettings() {
                     <select
                         name="boardsize"
                         value={boardSize}
-                        className='w-8/12 block rounded-none p-2 text-sm text-smoke uppercase bg-darkEarth md:p-4 focus:outline-none'
+                        className='w-8/12 block rounded-none px-2 py-4 text-sm text-smoke uppercase bg-darkEarth md:p-4 focus:outline-none'
                         onChange={(e) => setBoardSize(+e.target.value)}
                     >
                         <option value={3}>3 x 3</option>
