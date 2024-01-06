@@ -47,13 +47,12 @@ async def get_gpt_move(board, model: str = "gpt-3.5-turbo-1106"):
              "content": f"Given the current Tic-Tac-Toe board:\n{board}\nMake the next move for 'O':"},
         ],
     )
-    print(response)
     move = response.choices[0].message.content
     return move
 
 
 @app.get("/minimax-move")
-def get_minimax_move(board):
+async def get_minimax_move(board):
     """
     Find the best move for the AI player using the minimax algorithm.
     :param board: the game board  as a 2D list
