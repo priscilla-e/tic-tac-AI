@@ -8,14 +8,14 @@ I started this project to explore the performance of OpenAI's models in games. O
 
 
 # Features
-## Multiple Board Sizes
+### Multiple Board Sizes
 Ever wondered what it's like to play Tic-tac-toe on a larger board? Well now you can! Tic-tac-AI introduces multiple board sizes (3x3, 4x4, and 5x5).
 
-## Multi Player Mode
+### Multi Player Mode
 
 Play against friends in local multiplayer mode. Enjoy the timeless experience of competing with someone sitting right next to you.
 
-## Single Player Mode
+### Single Player Mode
 Challenge yourself against computer opponents with varying levels of difficulty:
 
 * **Easy**: The computer player uses a random algorithm to simulate moves, providing a straightforward and beginner-friendly opponent.
@@ -25,14 +25,14 @@ Challenge yourself against computer opponents with varying levels of difficulty:
 * **Hard**: Implements the Minimax algorithm with alpha-beta pruning optimization, offering a highly strategic and formidable opponent.
 
 
-## Minimax + Alpha-Beta Pruning and Fixed Depth Heuristic Evaluation
+### Minimax + Alpha-Beta Pruning and Fixed Depth Heuristic Evaluation
 In the hard difficulty, Tic-tac-AI uses the Minimax algorithm, a decision rule used in artificial intelligence, decision theory, game theory, statistics, and philosophy  for minimizing the possible loss in a worst-case scenario. 
 This algorithm is crucial in two player turn-based games such as Tic-Tac-Toe, Chess, etc.  
 
 To enhance its efficiency, especially for larger boards like 4x4 and 5x5, I implemented alpha-beta pruning. Alpha-beta pruning is an optimization technique that significantly reduces the number of nodes evaluated by the Minimax algorithm. This enhancement was critical in addressing the challenge of longer evaluation times on larger boards.  
 Furthermore,  Heuristics were introduced to evaluate the search tree at a fixed depth, rather than at terminal nodes.
 
-## Open AI 
+### Open AI 
 In the medium difficulty level of Tic-tac-AI, I integrated OpenAI's text-generation models to simulate an intelligent computer opponent. To achieve this, I began by crafting a specific prompt that would guide the AI to play Tic-tac-Toe effectively.
 
 > You are an opponent in an NXN Tic-Tac-Toe game. You're playing as 'O' and your goal is to win. Suggest the indexes of the next move as 'row,col' in JSON format. Do not suggest cells that are already occupied.
@@ -72,7 +72,7 @@ async def get_gpt_move(board, model: str = "gpt-3.5-turbo-1106"):
 * TailwindCSS
 
 # Run the project locally
-## Server  - Fast API
+### Server  - Fast API
 Navigate to the `/server` directory and activate a python virtual environment.  
 [How to create a virtual environment?](https://docs.python.org/3/library/venv.html)
 
@@ -87,7 +87,7 @@ pip install -r requirements.txt
 uvicorn main:app
 ```
 
-## Client - React
+### Client - React
 Ensure the backend server is already up and running. 
 
 **Set environment variables:**  
