@@ -4,10 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer utilities {
     .animate-pop-in {
         animation: pop-in 0.5s cubic-bezier(0.68, -0.55, 0.65, 0.52) forwards;
     }
+}
+
+input {
+    -webkit-appearance:none;
+    -webkit-border-radius:0;
 }
 
 
