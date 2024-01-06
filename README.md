@@ -6,6 +6,7 @@ I started this project to explore the performance of OpenAI's models in games. O
 # Preview
 **Live Demo:  https://tic-tac-ai-nu.vercel.app**
 
+https://github.com/priscilla-e/tic-tac-AI/assets/56302477/34fb8b3b-7e79-4588-b7c6-be759e220efa
 
 # Features
 ### Multiple Board Sizes
