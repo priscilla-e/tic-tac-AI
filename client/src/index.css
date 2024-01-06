@@ -10,8 +10,10 @@
     }
 }
 
+
 body {
-    @apply  bg-radial-custom max-h-screen relative;
+    height: 95vh;
+    @apply  bg-radial-custom relative;
 }
 
 /* Custom animations */

@@ -84,7 +84,7 @@ export default function SelectSettings() {
                         <input
                             value={player2}
                             type="text" name='player2' id='player2' placeholder='name'
-                            className="w-8/12 px-2 py-2 text-sm text-smoke uppercase bg-darkEarth focus:outline-none md:py-4 md:px-4"
+                            className="w-8/12 p-2 text-sm text-smoke uppercase bg-darkEarth md:py-4 focus:outline-none"
                             onChange={(e) => setPlayer2(e.target.value)}
                         />
                     </div>
@@ -94,9 +94,10 @@ export default function SelectSettings() {
                     <div className="flex items-center justify-between space-y-2">
                         <label htmlFor="difficulty">Difficulty</label>
                         <select
+                            id='difficulty'
                             name='difficulty'
                             value={difficulty}
-                            className='w-8/12 px-2 py-2 text-sm text-smoke uppercase bg-darkEarth focus:outline-none md:py-4 md:px-4'
+                            className='w-8/12 block rounded-none p-2 text-sm text-smoke uppercase bg-darkEarth md:p-4 focus:outline-none'
                             onChange={(e) => setDifficulty(e.target.value)}
                         >
                             <option value='easy'>Easy - Random</option>
@@ -105,12 +106,13 @@ export default function SelectSettings() {
                         </select>
                     </div>)
                 }
+
                 <div className="flex items-center justify-between space-y-2">
                     <label htmlFor="boardsize">Board size</label>
                     <select
                         name="boardsize"
                         value={boardSize}
-                        className='w-8/12 px-2 py-2 text-sm text-smoke uppercase bg-darkEarth focus:outline-none md:py-4 md:px-4'
+                        className='w-8/12 block rounded-none p-2 text-sm text-smoke uppercase bg-darkEarth md:p-4 focus:outline-none'
                         onChange={(e) => setBoardSize(+e.target.value)}
                     >
                         <option value={3}>3 x 3</option>
