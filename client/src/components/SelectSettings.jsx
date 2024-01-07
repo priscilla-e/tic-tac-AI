@@ -3,6 +3,7 @@ import Card from "./ui/Card.jsx";
 import Button from "./ui/Button.jsx";
 import GameContext from "../contexts/game-context.jsx";
 import {createEmptyGameBoard} from "../utils.js";
+import { HiOutlineSelector } from "react-icons/hi";
 
 export default function SelectSettings() {
     const ctx = useContext(GameContext);
@@ -74,7 +75,7 @@ export default function SelectSettings() {
                     <input
                         value={player1}
                         type="text" name='player1' id='player1' placeholder='name'
-                        className="w-8/12 px-2 py-2 text-sm text-smoke uppercase bg-darkEarth focus:outline-none md:py-4 md:px-4"
+                        className="appearance-none w-8/12 px-2 py-4 text-sm text-smoke uppercase bg-darkEarth md:p-4 focus:outline-none"
                         onChange={(e) => setPlayer1(e.target.value)}
                     />
                 </div>
@@ -84,7 +85,7 @@ export default function SelectSettings() {
                         <input
                             value={player2}
                             type="text" name='player2' id='player2' placeholder='name'
-                            className="appearance-none w-8/12 p-2 text-sm text-smoke uppercase bg-darkEarth md:py-4 focus:outline-none"
+                            className="appearance-none w-8/12 px-2 py-4 text-sm text-smoke uppercase bg-darkEarth md:p-4 focus:outline-none"
                             onChange={(e) => setPlayer2(e.target.value)}
                         />
                     </div>
@@ -93,32 +94,44 @@ export default function SelectSettings() {
                 {ctx.mode === 'single' && (
                     <div className="flex items-center justify-between space-y-2">
                         <label htmlFor="difficulty">Difficulty</label>
-                        <select
-                            id='difficulty'
-                            name='difficulty'
-                            value={difficulty}
-                            className='appearance-none w-8/12 block px-2 py-4 text-sm text-smoke uppercase bg-darkEarth md:p-4 focus:outline-none'
-                            onChange={(e) => setDifficulty(e.target.value)}
-                        >
-                            <option value='easy'>Easy - Random</option>
-                            <option value='medium'>Medium - Gpt</option>
-                            <option value='hard'>Hard - Minimax</option>
-                        </select>
+                        <div className='relative w-8/12'>
+                            <select
+                              id='difficulty'
+                              name='difficulty'
+                              value={difficulty}
+                              className='appearance-none w-full block px-2 py-4 text-sm text-smoke uppercase bg-darkEarth md:p-4 focus:outline-none'
+                              onChange={(e) => setDifficulty(e.target.value)}
+                            >
+                                <option value='easy'>Easy - Random</option>
+                                <option value='medium'>Medium - Gpt</option>
+                                <option value='hard'>Hard - Minimax</option>
+                            </select>
+                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2">
+                                <HiOutlineSelector />
+                            </div>
+                        </div>
+
                     </div>)
                 }
 
                 <div className="flex items-center justify-between space-y-2">
                     <label htmlFor="boardsize">Board size</label>
-                    <select
-                        name="boardsize"
-                        value={boardSize}
-                        className='appearance-none w-8/12 block px-2 py-4 text-sm text-smoke uppercase bg-darkEarth md:p-4 focus:outline-none'
-                        onChange={(e) => setBoardSize(+e.target.value)}
-                    >
-                        <option value={3}>3 x 3</option>
-                        <option value={4}>4 x 4</option>
-                        <option value={5}>5 x 5</option>
-                    </select>
+                    <div className='relative w-8/12'>
+                        <select
+                            name="boardsize"
+                            value={boardSize}
+                            className='appearance-none w-full block px-2 py-4 text-sm text-smoke uppercase bg-darkEarth md:p-4 focus:outline-none'
+                            onChange={(e) => setBoardSize(+e.target.value)}
+                        >
+                            <option value={3}>3 x 3</option>
+                            <option value={4}>4 x 4</option>
+                            <option value={5}>5 x 5</option>
+                        </select>
+
+                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2">
+                            <HiOutlineSelector />
+                        </div>
+                    </div>
                 </div>
 
                 <div className='mt-10 flex justify-between p-0'>
