@@ -37,7 +37,6 @@ Furthermore,  Heuristics were introduced to evaluate the search tree at a fixed 
 In the medium difficulty level of Tic-tac-AI, I integrated OpenAI's text-generation models to simulate an intelligent computer opponent. To achieve this, I began by crafting a specific prompt that would guide the AI to play Tic-tac-Toe effectively.
 
 > You are an opponent in an NXN Tic-Tac-Toe game. You're playing as 'O' and your goal is to win. Suggest the indexes of the next move as 'row,col' in JSON format. Do not suggest cells that are already occupied.
-It was crucial to have the response returned in JSON format to ease parsing
 
 This prompt was critical in setting the context for the AI. It clearly defines the role of the AI as an opponent in the game, specifies the symbol it's playing ('O'), and outlines the objective (to win). Most importantly, it instructs the AI to suggest its move in a 'row, col' format, encoded in JSON. This was a deliberate choice to ensure that the AI's responses could be easily parsed and integrated back into the game's logic.
 
