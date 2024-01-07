@@ -11,12 +11,6 @@
     }
 }
 
-input {
-    -webkit-appearance:none;
-    -webkit-border-radius:0;
-}
-
-
 body {
     @apply bg-radial-custom relative;
 }
