@@ -1,7 +1,7 @@
 # Tic-tac-~~toe~~AI
 
 Tic-tac-AI is an enhanced version of the classic [Tic-tac-toe](https://en.wikipedia.org/wiki/Tic-tac-toe) game that utilizes AI and Game Theory to enhance your gaming experience. 
-I started this project to explore the performance of OpenAI's models in games. Over the course of the development process, I also did some research into Game Theory, specifically focusing on the [**Minimax algorithm**](https://en.wikipedia.org/wiki/Minimax).
+I started this project to evaluate the performance of OpenAI's models in games. Over the course of the development process, I also did some research into Game Theory, specifically focusing on the [**Minimax algorithm**](https://en.wikipedia.org/wiki/Minimax).
 
 # Preview
 **Live Demo:  https://tic-tac-ai-nu.vercel.app**
