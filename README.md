@@ -66,9 +66,10 @@ async def get_gpt_move(board, model: str = "gpt-3.5-turbo-1106"):
 
 ```
 # Technologies
-* React.js
+* React.js + Vite (JavaScript)
 * FastAPI
 * OpenAI
+* HTML (JSX)
 * TailwindCSS
 
 # Run the project locally
